@@ -1,5 +1,7 @@
+import CourseGoal from './components/CourseGoal';
+
 const App = () => {
-  return <h1>App works!</h1>;
+  return <CourseGoal />;
 };
 
 export default App;
