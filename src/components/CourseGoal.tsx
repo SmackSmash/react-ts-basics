@@ -6,7 +6,7 @@ const CourseGoal = ({
   description: string;
 }) => {
   return (
-    <article className='bg-slate-200 rounded shadow-md m-4 p-4 w-1/3'>
+    <article className='bg-slate-200 rounded shadow-md p-4 basis-1/3'>
       <div className='text-slate-900'>
         <h2>{title}</h2>
         <p>{description}</p>
