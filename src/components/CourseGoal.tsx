@@ -1,9 +1,9 @@
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
 interface CourseGoalProps {
   title: string;
   description: string;
-  children?: string | ReactElement;
+  children?: ReactNode;
 }
 
 const CourseGoal = ({ title, description, children }: CourseGoalProps) => {
