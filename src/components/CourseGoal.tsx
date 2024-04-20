@@ -1,10 +1,9 @@
-import { type ReactNode } from 'react';
+import { type PropsWithChildren } from 'react';
 
-interface CourseGoalProps {
+type CourseGoalProps = PropsWithChildren<{
   title: string;
   description: string;
-  children?: ReactNode;
-}
+}>;
 
 const CourseGoal = ({ title, description, children }: CourseGoalProps) => {
   return (
