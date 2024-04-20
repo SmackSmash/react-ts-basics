@@ -1,10 +1,9 @@
-const CourseGoal = ({
-  title,
-  description
-}: {
+interface CourseGoalProps {
   title: string;
   description: string;
-}) => {
+}
+
+const CourseGoal = ({ title, description }: CourseGoalProps) => {
   return (
     <article className='bg-slate-200 rounded shadow-md p-4 basis-1/3'>
       <div className='text-slate-900'>
