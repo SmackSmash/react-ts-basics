@@ -1,9 +1,20 @@
+import { useState } from 'react';
 import CourseGoal from './components/CourseGoal.tsx';
 import Header from './components/Header.tsx';
 import HeaderImage from './assets/goals.svg';
 
+interface Goal {
+  title: string;
+  description: string;
+  id: number;
+}
+
 const App = () => {
-  const handleAddGoal = (): void => {};
+  const [goals, setGoals] = useState<Goal[]>([]);
+
+  const handleAddGoal = (goal: Goal): void => {
+    setGoals([...goals, goal]);
+  };
 
   return (
     <>
@@ -18,9 +29,9 @@ const App = () => {
         </button>
       </section>
       <main className='flex p-4 space-x-4'>
-        <CourseGoal title='Title' description='Description'>
-          Hello There
-        </CourseGoal>
+        {goals.map(goal => (
+          <CourseGoal />
+        ))}
       </main>
     </>
   );
