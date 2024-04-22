@@ -30,6 +30,9 @@ const App = () => {
 
   const handleAddGoal = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     setGoals([...goals, { title, description, id: nanoid() }]);
     setTitle('');
     setDescription('');
