@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { nanoid } from 'nanoid';
-import CourseGoal from './components/CourseGoal.tsx';
+import CourseGoalList from './components/CourseGoalList.tsx';
 import Header from './components/Header.tsx';
 import HeaderImage from './assets/goals.svg';
 
-interface Goal {
+export interface Goal {
   title: string;
   description: string;
   id: string;
@@ -67,11 +67,7 @@ const App = () => {
         </button>
       </form>
       <main className='flex p-4 space-x-4'>
-        {goals.map(({ title, description, id }) => (
-          <CourseGoal title={title} key={id}>
-            <p>{description}</p>
-          </CourseGoal>
-        ))}
+        <CourseGoalList goals={goals} />
       </main>
     </>
   );
