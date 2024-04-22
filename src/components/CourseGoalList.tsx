@@ -3,16 +3,12 @@ import CourseGoal from './CourseGoal.tsx';
 
 interface CourseGoalListProps {
   goals: Goal[];
-  handleDeleteGoal: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
-const CourseGoalList = ({ goals, handleDeleteGoal }: CourseGoalListProps) => {
+const CourseGoalList = ({ goals, onDelete }: CourseGoalListProps) => {
   return goals.map(({ title, description, id }) => (
-    <CourseGoal
-      title={title}
-      id={id}
-      key={id}
-      handleDeleteGoal={handleDeleteGoal}>
+    <CourseGoal title={title} id={id} key={id} onDelete={onDelete}>
       <p>{description}</p>
     </CourseGoal>
   ));

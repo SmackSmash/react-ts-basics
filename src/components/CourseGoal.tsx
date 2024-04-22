@@ -4,14 +4,14 @@ type CourseGoalProps = PropsWithChildren<{
   title: string;
   description?: string;
   id: string;
-  handleDeleteGoal: (id: string) => void;
+  onDelete: (id: string) => void;
 }>;
 
 const CourseGoal = ({
   title,
   description,
   id,
-  handleDeleteGoal,
+  onDelete,
   children
 }: CourseGoalProps) => {
   return (
@@ -23,7 +23,7 @@ const CourseGoal = ({
       </div>
       <button
         className='bg-red-700 text-white rounded py-2 px-5 w-full mt-4 pointer hover:bg-red-600'
-        onClick={() => handleDeleteGoal(id)}>
+        onClick={() => onDelete(id)}>
         DELETE
       </button>
     </article>

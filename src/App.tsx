@@ -71,7 +71,7 @@ const App = () => {
         </button>
       </form>
       <main className='flex p-4 space-x-4'>
-        <CourseGoalList goals={goals} handleDeleteGoal={handleDeleteGoal} />
+        <CourseGoalList goals={goals} onDelete={handleDeleteGoal} />
       </main>
     </>
   );
