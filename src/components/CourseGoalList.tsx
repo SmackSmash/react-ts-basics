@@ -1,5 +1,5 @@
 import { type Goal } from '../App';
-import CourseGoal from './CourseGoal';
+import CourseGoal from './CourseGoal.tsx';
 
 interface CourseGoalListProps {
   goals: Goal[];
