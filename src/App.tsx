@@ -34,6 +34,10 @@ const App = () => {
     setDescription('');
   };
 
+  const handleDeleteGoal = (id: string): void => {
+    setGoals(goals.filter((goal: Goal): boolean => goal.id !== id));
+  };
+
   return (
     <>
       <Header image={{ src: HeaderImage, alt: 'A list of goals' }}>
@@ -67,7 +71,7 @@ const App = () => {
         </button>
       </form>
       <main className='flex p-4 space-x-4'>
-        <CourseGoalList goals={goals} />
+        <CourseGoalList goals={goals} handleDeleteGoal={handleDeleteGoal} />
       </main>
     </>
   );
