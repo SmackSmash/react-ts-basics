@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, type SyntheticEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { nanoid } from 'nanoid';
 import CourseGoal from './components/CourseGoal.tsx';
 import Header from './components/Header.tsx';
