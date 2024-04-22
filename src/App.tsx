@@ -1,4 +1,4 @@
-import { useState, type SyntheticEvent } from 'react';
+import { ChangeEvent, useState, type SyntheticEvent } from 'react';
 import { nanoid } from 'nanoid';
 import CourseGoal from './components/CourseGoal.tsx';
 import Header from './components/Header.tsx';
@@ -12,14 +12,24 @@ interface Goal {
 
 const App = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleAddGoal = (event: SyntheticEvent): void => {
-    event.preventDefault();
-    console.log(event);
-    setGoals([
-      ...goals,
-      { title: nanoid(), description: nanoid(), id: nanoid() }
-    ]);
+  const handleTitleChange = ({
+    target: { value }
+  }: SyntheticEvent<HTMLInputElement, ChangeEvent>): void => {
+    setTitle(value);
+  };
+
+  const handleDescriptionChange = ({
+    target: { value }
+  }: SyntheticEvent<HTMLInputElement, ChangeEvent>): void => {
+    setDescription(value);
+  };
+
+  const handleAddGoal = (e: SyntheticEvent): void => {
+    e.preventDefault();
+    setGoals([...goals, { title, description, id: nanoid() }]);
   };
 
   return (
@@ -32,6 +42,7 @@ const App = () => {
         onSubmit={handleAddGoal}>
         <input
           className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
+          onChange={handleTitleChange}
           type='text'
           name='title'
           id='title'
@@ -39,6 +50,7 @@ const App = () => {
         />
         <input
           className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
+          onChange={handleDescriptionChange}
           type='text'
           name='description'
           id='description'
@@ -51,7 +63,7 @@ const App = () => {
         </button>
       </form>
       <main className='flex p-4 space-x-4'>
-        {goals.map(({ title, description, id }) => (
+        {goals.map(({ title, description, id }: Goal) => (
           <CourseGoal title={title} description={description} key={id} />
         ))}
       </main>
