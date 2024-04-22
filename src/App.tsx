@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, type SyntheticEvent } from 'react';
+import { ChangeEvent, FormEvent, useState, type SyntheticEvent } from 'react';
 import { nanoid } from 'nanoid';
 import CourseGoal from './components/CourseGoal.tsx';
 import Header from './components/Header.tsx';
@@ -27,9 +27,11 @@ const App = () => {
     setDescription(value);
   };
 
-  const handleAddGoal = (e: SubmitEvent): void => {
+  const handleAddGoal = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setGoals([...goals, { title, description, id: nanoid() }]);
+    setTitle('');
+    setDescription('');
   };
 
   return (
@@ -43,6 +45,7 @@ const App = () => {
         <input
           className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
           onChange={handleTitleChange}
+          value={title}
           type='text'
           name='title'
           id='title'
@@ -51,6 +54,7 @@ const App = () => {
         <input
           className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
           onChange={handleDescriptionChange}
+          value={description}
           type='text'
           name='description'
           id='description'
