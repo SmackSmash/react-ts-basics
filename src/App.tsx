@@ -17,17 +17,17 @@ const App = () => {
 
   const handleTitleChange = ({
     target: { value }
-  }: SyntheticEvent<HTMLInputElement, ChangeEvent>): void => {
+  }: ChangeEvent<HTMLInputElement>): void => {
     setTitle(value);
   };
 
   const handleDescriptionChange = ({
     target: { value }
-  }: SyntheticEvent<HTMLInputElement, ChangeEvent>): void => {
+  }: ChangeEvent<HTMLInputElement>): void => {
     setDescription(value);
   };
 
-  const handleAddGoal = (e: SyntheticEvent): void => {
+  const handleAddGoal = (e: SubmitEvent): void => {
     e.preventDefault();
     setGoals([...goals, { title, description, id: nanoid() }]);
   };
