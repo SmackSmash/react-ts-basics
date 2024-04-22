@@ -12,8 +12,10 @@ interface Goal {
 const App = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
 
-  const handleAddGoal = (goal: Goal): void => {
-    setGoals([...goals, goal]);
+  const handleAddGoal = (event): void => {
+    event.preventDefault();
+    console.log(event);
+    setGoals([...goals]);
   };
 
   return (
@@ -21,13 +23,29 @@ const App = () => {
       <Header image={{ src: HeaderImage, alt: 'A list of goals' }}>
         <h1 className='text-slate-900 text-2xl font-bold'>Your Course Goals</h1>
       </Header>
-      <section className='px-4'>
+      <form
+        className='p-4 flex justify-center items-center'
+        onSubmit={handleAddGoal}>
+        <input
+          className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
+          type='text'
+          name='title'
+          id='title'
+          placeholder='Title'
+        />
+        <input
+          className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
+          type='text'
+          name='description'
+          id='description'
+          placeholder='Description'
+        />
         <button
-          className='bg-blue-700 text-white rounded py-2 px-5 mt-4 pointer hover:bg-blue-600'
-          onClick={handleAddGoal}>
+          className='bg-blue-700 text-white rounded py-2 px-5 pointer hover:bg-blue-600'
+          type='submit'>
           Add Goal
         </button>
-      </section>
+      </form>
       <main className='flex p-4 space-x-4'>
         {goals.map(goal => (
           <CourseGoal />
