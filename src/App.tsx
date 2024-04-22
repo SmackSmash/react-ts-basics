@@ -1,5 +1,4 @@
-import { type ChangeEvent, type FormEvent, useState } from 'react';
-import { nanoid } from 'nanoid';
+import { useState } from 'react';
 import CourseGoalList from './components/CourseGoalList.tsx';
 import Header from './components/Header.tsx';
 import AddGoalForm from './components/AddGoalForm.tsx';
@@ -13,30 +12,6 @@ export interface Goal {
 
 const App = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleTitleChange = ({
-    target: { value }
-  }: ChangeEvent<HTMLInputElement>): void => {
-    setTitle(value);
-  };
-
-  const handleDescriptionChange = ({
-    target: { value }
-  }: ChangeEvent<HTMLInputElement>): void => {
-    setDescription(value);
-  };
-
-  const handleAddGoal = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-    setGoals([...goals, { title, description, id: nanoid() }]);
-    setTitle('');
-    setDescription('');
-  };
 
   const handleDeleteGoal = (id: string): void => {
     setGoals(goals.filter((goal: Goal): boolean => goal.id !== id));
@@ -48,13 +23,7 @@ const App = () => {
         <h1 className='text-slate-900 text-2xl font-bold'>Your Course Goals</h1>
       </Header>
       <section>
-        <AddGoalForm
-          title={title}
-          description={description}
-          onTitleChange={handleTitleChange}
-          onDescriptionChange={handleDescriptionChange}
-          onAddGoal={handleAddGoal}
-        />
+        <AddGoalForm setGoals={setGoals} />
       </section>
       <main className='flex p-4 space-x-4'>
         <CourseGoalList goals={goals} onDelete={handleDeleteGoal} />

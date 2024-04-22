@@ -1,25 +1,50 @@
-import { type FormEvent, type ChangeEvent } from 'react';
+import {
+  type FormEvent,
+  type ChangeEvent,
+  type Dispatch,
+  type SetStateAction,
+  useState
+} from 'react';
+import { type Goal } from '../App';
+import { nanoid } from 'nanoid';
 
 interface AddGoalFormProps {
-  title: string;
-  description: string;
-  onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onDescriptionChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onAddGoal: (e: FormEvent<HTMLFormElement>) => void;
+  setGoals: Dispatch<SetStateAction<Goal[]>>;
 }
 
-const AddGoalForm = ({
-  title,
-  description,
-  onTitleChange,
-  onDescriptionChange,
-  onAddGoal
-}: AddGoalFormProps) => {
+const AddGoalForm = ({ setGoals }: AddGoalFormProps) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleTitleChange = ({
+    target: { value }
+  }: ChangeEvent<HTMLInputElement>): void => {
+    setTitle(value);
+  };
+
+  const handleDescriptionChange = ({
+    target: { value }
+  }: ChangeEvent<HTMLInputElement>): void => {
+    setDescription(value);
+  };
+
+  const handleAddGoal = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    setGoals(goals => [...goals, { title, description, id: nanoid() }]);
+    setTitle('');
+    setDescription('');
+  };
+
   return (
-    <form className='p-4 flex justify-center items-center' onSubmit={onAddGoal}>
+    <form
+      className='p-4 flex justify-center items-center'
+      onSubmit={handleAddGoal}>
       <input
         className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
-        onChange={onTitleChange}
+        onChange={handleTitleChange}
         value={title}
         type='text'
         name='title'
@@ -28,7 +53,7 @@ const AddGoalForm = ({
       />
       <input
         className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
-        onChange={onDescriptionChange}
+        onChange={handleDescriptionChange}
         value={description}
         type='text'
         name='description'
