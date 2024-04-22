@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, type SyntheticEvent } from 'react';
+import { nanoid } from 'nanoid';
 import CourseGoal from './components/CourseGoal.tsx';
 import Header from './components/Header.tsx';
 import HeaderImage from './assets/goals.svg';
@@ -6,16 +7,19 @@ import HeaderImage from './assets/goals.svg';
 interface Goal {
   title: string;
   description: string;
-  id: number;
+  id: string;
 }
 
 const App = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
 
-  const handleAddGoal = (event): void => {
+  const handleAddGoal = (event: SyntheticEvent): void => {
     event.preventDefault();
     console.log(event);
-    setGoals([...goals]);
+    setGoals([
+      ...goals,
+      { title: nanoid(), description: nanoid(), id: nanoid() }
+    ]);
   };
 
   return (
@@ -47,8 +51,8 @@ const App = () => {
         </button>
       </form>
       <main className='flex p-4 space-x-4'>
-        {goals.map(goal => (
-          <CourseGoal />
+        {goals.map(({ title, description, id }) => (
+          <CourseGoal title={title} description={description} key={id} />
         ))}
       </main>
     </>
