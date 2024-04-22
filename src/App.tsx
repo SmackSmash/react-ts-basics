@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { nanoid } from 'nanoid';
 import CourseGoalList from './components/CourseGoalList.tsx';
 import Header from './components/Header.tsx';
+import AddGoalForm from './components/AddGoalForm.tsx';
 import HeaderImage from './assets/goals.svg';
 
 export interface Goal {
@@ -43,33 +44,13 @@ const App = () => {
       <Header image={{ src: HeaderImage, alt: 'A list of goals' }}>
         <h1 className='text-slate-900 text-2xl font-bold'>Your Course Goals</h1>
       </Header>
-      <form
-        className='p-4 flex justify-center items-center'
-        onSubmit={handleAddGoal}>
-        <input
-          className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
-          onChange={handleTitleChange}
-          value={title}
-          type='text'
-          name='title'
-          id='title'
-          placeholder='Title'
-        />
-        <input
-          className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
-          onChange={handleDescriptionChange}
-          value={description}
-          type='text'
-          name='description'
-          id='description'
-          placeholder='Description'
-        />
-        <button
-          className='bg-blue-700 text-white rounded py-2 px-5 pointer hover:bg-blue-600'
-          type='submit'>
-          Add Goal
-        </button>
-      </form>
+      <AddGoalForm
+        title={title}
+        description={description}
+        onTitleChange={handleTitleChange}
+        onDescriptionChange={handleDescriptionChange}
+        onAddGoal={handleAddGoal}
+      />
       <main className='flex p-4 space-x-4'>
         <CourseGoalList goals={goals} onDelete={handleDeleteGoal} />
       </main>
