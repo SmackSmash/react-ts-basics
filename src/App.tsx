@@ -68,7 +68,9 @@ const App = () => {
       </form>
       <main className='flex p-4 space-x-4'>
         {goals.map(({ title, description, id }) => (
-          <CourseGoal title={title} description={description} key={id} />
+          <CourseGoal title={title} key={id}>
+            <p>{description}</p>
+          </CourseGoal>
         ))}
       </main>
     </>
