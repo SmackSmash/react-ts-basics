@@ -5,7 +5,8 @@ interface InfoBoxProps {
 }
 
 const InfoBox = ({ mode, children }: PropsWithChildren<InfoBoxProps>) => {
-  const infoBoxClasses = 'border flex h-20 m-4 items-center justify-center';
+  const infoBoxClasses =
+    'border flex flex-col h-20 m-4 items-center justify-center';
 
   if (mode === 'hint') {
     return (
@@ -18,6 +19,7 @@ const InfoBox = ({ mode, children }: PropsWithChildren<InfoBoxProps>) => {
   if (mode === 'warning') {
     return (
       <aside className={`${infoBoxClasses} border-orange-500 text-orange-500`}>
+        <h2 className='font-bold text-2xl uppercase'>Warning</h2>
         <p>{children}</p>
       </aside>
     );
