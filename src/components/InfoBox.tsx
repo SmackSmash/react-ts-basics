@@ -1,20 +1,24 @@
 import { type PropsWithChildren } from 'react';
 
-interface InfoBoxProps {
-  mode: 'hint' | 'warning';
-  severity?: 'low' | 'medium' | 'high';
+interface HintBoxProps {
+  mode: 'hint';
 }
 
-const InfoBox = ({
-  mode,
-  severity,
-  children
-}: PropsWithChildren<InfoBoxProps>) => {
+interface WarningBoxProps {
+  mode: 'warning';
+  severity: 'low' | 'medium' | 'high';
+}
+
+type InfoBoxProps = HintBoxProps | WarningBoxProps;
+
+const InfoBox = (props: PropsWithChildren<InfoBoxProps>) => {
+  const { mode, children } = props;
+
   let infoBoxClasses =
     'border flex flex-col h-20 m-4 items-center justify-center';
 
   if (mode === 'hint') {
-    infoBoxClasses += ' order-cyan-500 text-cyan-500';
+    infoBoxClasses += ' border-cyan-500 text-cyan-500';
 
     return (
       <aside className={infoBoxClasses}>
@@ -24,6 +28,8 @@ const InfoBox = ({
   }
 
   if (mode === 'warning') {
+    const { severity } = props;
+
     switch (severity) {
       case 'low':
         infoBoxClasses += ' border-yellow-500 text-yellow-500';
@@ -34,6 +40,7 @@ const InfoBox = ({
         break;
       case 'high':
         infoBoxClasses += ' border-red-500 text-red-500';
+        break;
     }
 
     return (
