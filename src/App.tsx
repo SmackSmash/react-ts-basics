@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CourseGoalList from './components/CourseGoalList.tsx';
 import Header from './components/Header.tsx';
+import InfoBox from './components/InfoBox.tsx';
 import AddGoalForm from './components/AddGoalForm.tsx';
 import HeaderImage from './assets/goals.svg';
 
@@ -29,6 +30,12 @@ const App = () => {
       <section>
         <AddGoalForm onAddGoal={handleAddGoal} />
       </section>
+      {goals.length === 0 && (
+        <InfoBox mode='hint'>You don't have any goals yet</InfoBox>
+      )}
+      {goals.length > 3 && (
+        <InfoBox mode='warning'>Slow down that's way too many goals!</InfoBox>
+      )}
       <main className='flex p-4 space-x-4'>
         <CourseGoalList goals={goals} onDelete={handleDeleteGoal} />
       </main>
