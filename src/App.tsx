@@ -13,6 +13,10 @@ export interface Goal {
 const App = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
 
+  const handleAddGoal = (goal: Goal): void => {
+    setGoals(goals => [...goals, goal]);
+  };
+
   const handleDeleteGoal = (id: string): void => {
     setGoals(goals.filter((goal: Goal): boolean => goal.id !== id));
   };
@@ -23,7 +27,7 @@ const App = () => {
         <h1 className='text-slate-900 text-2xl font-bold'>Your Course Goals</h1>
       </Header>
       <section>
-        <AddGoalForm setGoals={setGoals} />
+        <AddGoalForm onAddGoal={handleAddGoal} />
       </section>
       <main className='flex p-4 space-x-4'>
         <CourseGoalList goals={goals} onDelete={handleDeleteGoal} />

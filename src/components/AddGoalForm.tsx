@@ -1,18 +1,12 @@
-import {
-  type FormEvent,
-  type ChangeEvent,
-  type Dispatch,
-  type SetStateAction,
-  useState
-} from 'react';
-import { type Goal } from '../App';
+import { type FormEvent, type ChangeEvent, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { type Goal } from '../App';
 
 interface AddGoalFormProps {
-  setGoals: Dispatch<SetStateAction<Goal[]>>;
+  onAddGoal: (goal: Goal) => void;
 }
 
-const AddGoalForm = ({ setGoals }: AddGoalFormProps) => {
+const AddGoalForm = ({ onAddGoal }: AddGoalFormProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -28,12 +22,12 @@ const AddGoalForm = ({ setGoals }: AddGoalFormProps) => {
     setDescription(value);
   };
 
-  const handleAddGoal = (e: FormEvent<HTMLFormElement>): void => {
+  const handleAddGoal = (e: FormEvent<HTMLFormElement>, goal: Goal) => {
     e.preventDefault();
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-    setGoals(goals => [...goals, { title, description, id: nanoid() }]);
+    onAddGoal(goal);
     setTitle('');
     setDescription('');
   };
@@ -41,7 +35,7 @@ const AddGoalForm = ({ setGoals }: AddGoalFormProps) => {
   return (
     <form
       className='p-4 flex justify-center items-center'
-      onSubmit={handleAddGoal}>
+      onSubmit={e => handleAddGoal(e, { title, description, id: nanoid() })}>
       <input
         className='p-2 rounded bg bg-slate-900 mr-2 text-slate-100'
         onChange={handleTitleChange}
