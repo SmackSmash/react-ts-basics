@@ -9,7 +9,7 @@ const InfoBox = ({ mode, children }: PropsWithChildren<InfoBoxProps>) => {
 
   if (mode === 'hint') {
     return (
-      <aside className={`${infoBoxClasses} border-blue-500 text-blue-500`}>
+      <aside className={`${infoBoxClasses} border-cyan-500 text-cyan-500`}>
         <p>{children}</p>
       </aside>
     );
