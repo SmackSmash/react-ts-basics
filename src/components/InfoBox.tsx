@@ -5,7 +5,11 @@ interface InfoBoxProps {
   severity?: 'low' | 'medium' | 'high';
 }
 
-const InfoBox = ({ mode, children }: PropsWithChildren<InfoBoxProps>) => {
+const InfoBox = ({
+  mode,
+  severity,
+  children
+}: PropsWithChildren<InfoBoxProps>) => {
   let infoBoxClasses =
     'border flex flex-col h-20 m-4 items-center justify-center';
 
@@ -20,7 +24,17 @@ const InfoBox = ({ mode, children }: PropsWithChildren<InfoBoxProps>) => {
   }
 
   if (mode === 'warning') {
-    infoBoxClasses += ' border-orange-500 text-orange-500';
+    switch (severity) {
+      case 'low':
+        infoBoxClasses += ' border-yellow-500 text-yellow-500';
+        break;
+      case 'medium':
+      default:
+        infoBoxClasses += ' border-orange-500 text-orange-500';
+        break;
+      case 'high':
+        infoBoxClasses += ' border-red-500 text-red-500';
+    }
 
     return (
       <aside className={infoBoxClasses}>
