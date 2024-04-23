@@ -34,7 +34,9 @@ const App = () => {
         <InfoBox mode='hint'>You don't have any goals yet</InfoBox>
       )}
       {goals.length > 3 && (
-        <InfoBox mode='warning'>Slow down that's way too many goals!</InfoBox>
+        <InfoBox mode='warning' severity='low'>
+          Slow down that's way too many goals!
+        </InfoBox>
       )}
       <main className='flex p-4 space-x-4'>
         <CourseGoalList goals={goals} onDelete={handleDeleteGoal} />
